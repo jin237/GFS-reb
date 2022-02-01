@@ -10,6 +10,7 @@ platform: linux/x86_64
 
 **をコメントアウトする。**
 
-1. docker-compose.ymlがあるフォルダで`docker-compose up -d`を実行。
-2. `cd api`
-3. `php artisan migrate`
+1. docker-compose.ymlがあるフォルダで`mkdir db`を実行。
+2. docker-compose.ymlがあるフォルダで`docker-compose up -d`を実行。
+3. `cd api`
+4. `php artisan migrate`
