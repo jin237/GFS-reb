@@ -32,9 +32,26 @@ class TestDataSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-
             DB::table('likes')->insert($param);
+        }
+
+        for ($i = 1; $i <= 10; $i++) {
+            $param = [
+                'murmur_id' => random_int(1, 4),
+                'user_id' => random_int(1, 2),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
             DB::table('louds')->insert($param);
+        }
+
+        for ($i = 1; $i <= 10; $i++) {
+            $param = [
+                'murmur_id' => random_int(1, 4),
+                'user_id' => random_int(1, 2),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
             DB::table('replys')->insert($param);
         }
     }
