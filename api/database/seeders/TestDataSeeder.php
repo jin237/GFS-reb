@@ -25,34 +25,42 @@ class TestDataSeeder extends Seeder
             });
         });
 
-        for ($i = 1; $i <= 10; $i++) {
-            $param = [
-                'murmur_id' => random_int(1, 4),
-                'user_id' => random_int(1, 2),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-            DB::table('likes')->insert($param);
-        }
+        $murmur = array_values(Murmur::all('id')->toArray());
+        $user = array_values(User::all('id')->toArray());
 
-        for ($i = 1; $i <= 10; $i++) {
-            $param = [
-                'murmur_id' => random_int(1, 4),
-                'user_id' => random_int(1, 2),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-            DB::table('louds')->insert($param);
-        }
+        foreach ($murmur as $MurmurAry) {
+            foreach ($user as $userAry) {
+                $end = random_int(3, 10);
+                for ($i = 1; $i <= $end; $i++) {
+                    $param = [
+                        'murmur_id' => $MurmurAry["id"],
+                        'user_id' => $userAry["id"],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                    DB::table('likes')->insert($param);
+                }
 
-        for ($i = 1; $i <= 10; $i++) {
-            $param = [
-                'murmur_id' => random_int(1, 4),
-                'user_id' => random_int(1, 2),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-            DB::table('replys')->insert($param);
+                for ($i = 1; $i <= $end; $i++) {
+                    $param = [
+                        'murmur_id' => $MurmurAry["id"],
+                        'user_id' => $userAry["id"],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                    DB::table('louds')->insert($param);
+                }
+
+                for ($i = 1; $i <= $end; $i++) {
+                    $param = [
+                        'murmur_id' => $MurmurAry["id"],
+                        'user_id' => $userAry["id"],
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                    DB::table('replys')->insert($param);
+                }
+            }
         }
     }
 }

@@ -11,6 +11,11 @@ class Murmur extends Model
 
     protected $table = 'murmur';
 
+    protected $fillable = [
+        'content',
+        'user_id',
+    ];
+
     public function like()
     {
         return $this->hasMany(Like::class);
@@ -25,4 +30,6 @@ class Murmur extends Model
     {
         return $this->hasMany(Reply::class);
     }
+
+    
 }

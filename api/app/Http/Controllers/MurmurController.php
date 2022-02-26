@@ -39,7 +39,10 @@ class MurmurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $murmur = new Murmur();
+        $murmur->content = $request->json('content');
+        $murmur->user_id = $request->json('user_id');
+        $murmur->save();
     }
 
     /**
@@ -50,7 +53,21 @@ class MurmurController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(DB::table('murmur')
+            ->select('murmur.id',
+                     'murmur.user_id',
+                     'content',
+                     DB::raw('count(distinct likes.id) as likes'),
+                     DB::raw('count(distinct louds.id) as loud'),
+                     DB::raw('count(distinct replys.id) as reply'),
+                     'murmur.created_at',
+                     'murmur.updated_at')
+            ->where('murmur.id', '=', $id)
+            ->leftJoin('likes', 'murmur.id' , '=' , 'likes.murmur_id')
+            ->leftJoin('louds', 'murmur.id' , '=' , 'louds.murmur_id')
+            ->leftJoin('replys', 'murmur.id' , '=' , 'replys.murmur_id')
+            ->groupBy('murmur.id')
+            ->get());
     }
 
     /**
@@ -61,8 +78,10 @@ class MurmurController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {        
+        $murmur = Murmur::find($id);
+        $murmur->content = $request->json('content');
+        $murmur->save();
     }
 
     /**
@@ -73,6 +92,7 @@ class MurmurController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $murmur = Murmur::find($id);
+        $murmur->delete();
     }
 }
