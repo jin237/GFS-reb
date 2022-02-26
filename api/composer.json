@@ -33,6 +33,9 @@
         }
     },
     "scripts": {
+        "seed-fresh": "php artisan migrate:fresh --seed",
+        "seed" : "php artisan db:seed",
+        "test": "php artisan test",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

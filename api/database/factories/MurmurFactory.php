@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class MurmurFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,9 +14,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'user_name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'password' => '123456', // password
+            'content' => $this->faker->realText(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

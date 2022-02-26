@@ -12,6 +12,26 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function murmur()
+    {
+        return $this->hasMany(Murmur::class);
+    }
+
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function loud()
+    {
+        return $this->hasMany(Loud::class);
+    }
+
+    public function reply()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
