@@ -69,7 +69,33 @@ class MurmurTest extends TestCase
         ];
 
         $response = $this->putJson("api/murmur/$id", $murmur);
+
         $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function api_murmurにcontentが空ではPUTメソッドにはアクセスできない()
+    {
+        $murmur = Murmur::first()->toArray();
+        $id = $murmur["id"];
+
+        $param = [
+            'content' => '',
+        ];
+
+        $response = $this->putJson("api/murmur/$id", $param);
+
+        $error_response = [
+            'message' => 'The given data was invalid.',
+            "errors" => [
+                "content" => [
+                    "contentは、必須項目です。"
+                ],
+            ]
+        ];
+        $response->assertExactJson($error_response);
     }
 
     /**
